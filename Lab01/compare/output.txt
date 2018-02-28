@@ -1,1 +1,1 @@
-Files are equal
+Files are different. Line number is 1

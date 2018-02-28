@@ -5,17 +5,25 @@ rem Переменная PROGRAM будет хранить первый аргумент командной строки заключённы
 set PROGRAM="%~1"
 
 rem сравниваем два пустых файла
-%PROGRAM% FirstEmpty.txt SecondEmpty.txt 
+%PROGRAM% FirstEmpty.txt SecondEmpty.txt  > output.txt
+if ERRORLEVEL 1 goto err
+fc output.txt equal.txt 
 if ERRORLEVEL 1 goto err
 
-%PROGRAM% multiLine.txt theSameMultiLine.txt 
+%PROGRAM% multiLine.txt theSameMultiLine.txt > output.txt
+if ERRORLEVEL 1 goto err
+fc output.txt equal.txt  
 if ERRORLEVEL 1 goto err
 
-%PROGRAM% multiLine.txt oneLine.txt 
-if NOT ERRORLEVEL 1 goto err
+%PROGRAM% multiLine.txt oneLine.txt > output.txt 
+if ERRORLEVEL 1 goto err
+fc output.txt notequal.txt  
+if ERRORLEVEL 1 goto err
 
-%PROGRAM% non-existing-file.txt FirstEmpty.txt 
+%PROGRAM% non-existing-file.txt FirstEmpty.txt > output.txt
 if NOT ERRORLEVEL 1 goto err
+fc output.txt err.txt  
+if ERRORLEVEL 1 goto err
 
 echo Program testing succeeded
 exit 0
