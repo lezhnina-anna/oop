@@ -25,7 +25,7 @@ if ERRORLEVEL 1 goto err
 rem несуществующий входной файл
 %PROGRAM% non-existing-file.txt input.txt > output.txt
 if NOT ERRORLEVEL 1 goto err
-fc output.txt file_err.txt
+fc output.txt InvalidOutput.txt
 if ERRORLEVEL 1 goto err
 
 echo Program testing succeeded
