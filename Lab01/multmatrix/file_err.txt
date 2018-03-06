@@ -1,1 +1,1 @@
-Error: failed to open files for reading
+Error: failed to open file for reading

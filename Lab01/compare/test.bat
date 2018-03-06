@@ -4,7 +4,7 @@ rem %~1 - значение первого аргумента командной строки bat-файла с удалением обра
 rem Переменная PROGRAM будет хранить первый аргумент командной строки заключённый в кавычки
 set PROGRAM="%~1"
 
-rem сравниваем два пустых файла
+rem сравниваем два пустых файла 
 %PROGRAM% FirstEmpty.txt SecondEmpty.txt  > output.txt
 if ERRORLEVEL 1 goto err
 fc output.txt equal.txt 
@@ -23,6 +23,16 @@ if ERRORLEVEL 1 goto err
 %PROGRAM% non-existing-file.txt FirstEmpty.txt > output.txt
 if NOT ERRORLEVEL 1 goto err
 fc output.txt err.txt  
+if ERRORLEVEL 1 goto err
+
+%PROGRAM% 1.txt 2.txt > output.txt
+if ERRORLEVEL 1 goto err
+fc output.txt out.txt  
+if ERRORLEVEL 1 goto err 
+
+%PROGRAM% 2.txt 1.txt > output.txt
+if ERRORLEVEL 1 goto err
+fc output.txt out.txt  
 if ERRORLEVEL 1 goto err
 
 echo Program testing succeeded
