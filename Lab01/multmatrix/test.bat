@@ -5,12 +5,12 @@ rem Переменная PROGRAM будет хранить первый аргумент командной строки заключённы
 set PROGRAM="%~1"
  
 rem корректные входные данные
-%PROGRAM% input.txt input2.txt > output.txt 
+%PROGRAM% input.txt identityMatrix.txt > output.txt 
 if ERRORLEVEL 1 goto err
 fc output.txt CorrectOutput.txt
 if ERRORLEVEL 1 goto err
 
-%PROGRAM% doubleNum.txt input2.txt > output.txt 
+%PROGRAM% doubleNum.txt identityMatrix.txt > output.txt 
 if ERRORLEVEL 1 goto err
 fc output.txt doubleNumOutput.txt
 if ERRORLEVEL 1 goto err
