@@ -10,6 +10,11 @@ if ERRORLEVEL 1 goto err
 fc output.txt CorrectOutput.txt
 if ERRORLEVEL 1 goto err
 
+%PROGRAM% doubleNum.txt input2.txt > output.txt 
+if ERRORLEVEL 1 goto err
+fc output.txt doubleNumOutput.txt
+if ERRORLEVEL 1 goto err
+
 rem некорректные входные данные
 %PROGRAM% input.txt InvalidInput.txt > output.txt
 if NOT ERRORLEVEL 1 goto err
