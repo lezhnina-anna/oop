@@ -25,12 +25,12 @@ if NOT ERRORLEVEL 1 goto err
 fc output.txt err.txt  
 if ERRORLEVEL 1 goto err
 
-%PROGRAM% 1.txt 2.txt > output.txt
+%PROGRAM% LongerFileWithEqualBeginning.txt ShorterFileWithEqualBeginning.txt > output.txt
 if ERRORLEVEL 1 goto err
 fc output.txt out.txt  
 if ERRORLEVEL 1 goto err 
 
-%PROGRAM% 2.txt 1.txt > output.txt
+%PROGRAM% ShorterFileWithEqualBeginning.txt LongerFileWithEqualBeginning.txt > output.txt
 if ERRORLEVEL 1 goto err
 fc output.txt out.txt  
 if ERRORLEVEL 1 goto err
