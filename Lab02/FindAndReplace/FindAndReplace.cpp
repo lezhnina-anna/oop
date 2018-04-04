@@ -2,7 +2,6 @@
 #include "FindAndReplace.h"
 #include <string>
 
-
 std::string FindAndReplace(std::string text, const std::string stringToSearch, std::string stringToReplace)
 {
 	if (!stringToSearch.empty())
@@ -15,6 +14,6 @@ std::string FindAndReplace(std::string text, const std::string stringToSearch, s
 			position += stringToReplace.length();
 		}
 	}
-	
+
 	return text;
 }

@@ -1,22 +1,23 @@
 #include "stdafx.h"
-#include <vector>
-#include <iostream>
-#include <fstream>
-#include <iterator>
-#include <algorithm>
 #include "processVector.h"
+#include <algorithm>
+#include <fstream>
+#include <iostream>
+#include <iterator>
+#include <vector>
 
 void ProcessVector(std::vector<double>& numbers)
 {
 	if (!numbers.empty())
 	{
-		const double minNumber = *std::min_element(begin(numbers), end(numbers));
-		const double maxNumber = *std::max_element(begin(numbers), end(numbers));
+		auto result = std::minmax_element(numbers.begin(), numbers.end());
+		double minNumber = *result.first;
+		double maxNumber = *result.second;
 
 		auto processNumber = [&minNumber, &maxNumber](double number) {
 			if (maxNumber == 0)
 			{
-				return abs(number * minNumber);
+				return (number * minNumber);
 			}
 			return (number * minNumber / maxNumber);
 		};
