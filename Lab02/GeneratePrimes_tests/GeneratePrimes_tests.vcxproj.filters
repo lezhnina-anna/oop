@@ -26,13 +26,13 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="translator_tests.cpp">
+    <ClCompile Include="GeneratePrimes_tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TranslatorTests.cpp">
+    <ClCompile Include="..\GeneratePrimeNumbers\GeneratePrimes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\translator\WorkWithDictionary.cpp">
+    <ClCompile Include="GeneratePrimesTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

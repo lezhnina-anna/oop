@@ -17,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "translator_tests", "transla
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GeneratePrimeNumbers", "GeneratePrimeNumbers\GeneratePrimeNumbers.vcxproj", "{74B96E62-5414-4900-8CFF-266D0867FA73}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GeneratePrimes_tests", "GeneratePrimes_tests\GeneratePrimes_tests.vcxproj", "{30DD0FB5-3324-4757-B517-3FD49DC928A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -81,6 +83,14 @@ Global
 		{74B96E62-5414-4900-8CFF-266D0867FA73}.Release|x64.Build.0 = Release|x64
 		{74B96E62-5414-4900-8CFF-266D0867FA73}.Release|x86.ActiveCfg = Release|Win32
 		{74B96E62-5414-4900-8CFF-266D0867FA73}.Release|x86.Build.0 = Release|Win32
+		{30DD0FB5-3324-4757-B517-3FD49DC928A4}.Debug|x64.ActiveCfg = Debug|x64
+		{30DD0FB5-3324-4757-B517-3FD49DC928A4}.Debug|x64.Build.0 = Debug|x64
+		{30DD0FB5-3324-4757-B517-3FD49DC928A4}.Debug|x86.ActiveCfg = Debug|Win32
+		{30DD0FB5-3324-4757-B517-3FD49DC928A4}.Debug|x86.Build.0 = Debug|Win32
+		{30DD0FB5-3324-4757-B517-3FD49DC928A4}.Release|x64.ActiveCfg = Release|x64
+		{30DD0FB5-3324-4757-B517-3FD49DC928A4}.Release|x64.Build.0 = Release|x64
+		{30DD0FB5-3324-4757-B517-3FD49DC928A4}.Release|x86.ActiveCfg = Release|Win32
+		{30DD0FB5-3324-4757-B517-3FD49DC928A4}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
