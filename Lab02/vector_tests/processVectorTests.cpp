@@ -45,7 +45,7 @@ BOOST_AUTO_TEST_SUITE(ProcessVector_function)
 		
 	// при обработке вектора с положительными и отрицательными элементами
 	BOOST_AUTO_TEST_SUITE(when_processing_a_vector_with_several_positive_elements_and_several_negative_elements)
-		// должен добавить их среднее арифметическое к каждому элементу
+		// должен умножить каждый элемент на минимальный и разделить на максимальный 
 		BOOST_AUTO_TEST_CASE(should_myltiply_each_element_to_min_and_divide_to_max)
 		{
 			vector<double> numbers = { -4, -2, 1, 2 };

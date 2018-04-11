@@ -1,10 +1,6 @@
 #include "stdafx.h"
 #include "processVector.h"
 #include <algorithm>
-#include <fstream>
-#include <iostream>
-#include <iterator>
-#include <vector>
 
 void ProcessVector(std::vector<double>& numbers)
 {

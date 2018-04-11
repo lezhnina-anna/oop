@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <tchar.h>
 
+#define BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE
 #include <boost/algorithm/string/replace.hpp>
 
 #define BOOST_TEST_INCLUDED

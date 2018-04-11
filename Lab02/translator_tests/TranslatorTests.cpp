@@ -31,7 +31,7 @@ BOOST_AUTO_TEST_CASE(get_empty_translation_and_not_add_in_map)
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-
+/*
 BOOST_AUTO_TEST_SUITE(Translate_function)
 BOOST_AUTO_TEST_CASE(request_an_existing_word)
 {
@@ -49,6 +49,6 @@ BOOST_AUTO_TEST_CASE(request_an_not_existing_word)
 	};
 
 	BOOST_CHECK(Translate(Map, "cat") == false);
-}
+} 
 
-BOOST_AUTO_TEST_SUITE_END()
+BOOST_AUTO_TEST_SUITE_END() */

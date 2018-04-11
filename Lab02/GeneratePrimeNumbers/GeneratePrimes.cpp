@@ -1,8 +1,16 @@
 #include "stdafx.h"
 
+const int MAX_VALUE = 100000000;
+const int MIN_VALUE = 2;
+
 std::vector<bool> GeneratePrimeNumbers(const int upperBound)
 {
 	std::vector<bool> primes(upperBound + 1, true);
+
+	if (upperBound > MAX_VALUE || upperBound < MIN_VALUE)
+	{
+		return primes = {};
+	}
 
 	primes[0] = primes[1] = false;
 
@@ -29,10 +37,9 @@ std::set<int> GeneratePrimeNumbersSet(int upperBound)
 	{
 		if (primesVector[i])
 		{
-			primesSet.insert(i);
+			primesSet.insert(primesSet.end(), i);
 		}
 	}
 
 	return primesSet;
 }
-

@@ -4,10 +4,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vector", "vector\vector.vcxproj", "{F7B0C1D3-FBC6-4EDC-9BD2-7D4A819312A0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{36989725-2689-436E-8ADA-B1D27B0642C7} = {36989725-2689-436E-8ADA-B1D27B0642C7}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FindAndReplace", "FindAndReplace\FindAndReplace.vcxproj", "{083A0A36-DE33-4A1F-8042-301F738FAAE0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AECF8B19-FBA7-4850-91D0-19F21E279E37} = {AECF8B19-FBA7-4850-91D0-19F21E279E37}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "translator", "translator\translator.vcxproj", "{EBA3BD39-0A3E-41C2-B875-68F6E3167467}"
+	ProjectSection(ProjectDependencies) = postProject
+		{14B8830E-ABB3-42D6-B413-C5D17DF527E4} = {14B8830E-ABB3-42D6-B413-C5D17DF527E4}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vector_tests", "vector_tests\task1_tests.vcxproj", "{36989725-2689-436E-8ADA-B1D27B0642C7}"
 EndProject
@@ -16,6 +25,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "translator_tests", "translator_tests\translator_tests.vcxproj", "{14B8830E-ABB3-42D6-B413-C5D17DF527E4}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GeneratePrimeNumbers", "GeneratePrimeNumbers\GeneratePrimeNumbers.vcxproj", "{74B96E62-5414-4900-8CFF-266D0867FA73}"
+	ProjectSection(ProjectDependencies) = postProject
+		{30DD0FB5-3324-4757-B517-3FD49DC928A4} = {30DD0FB5-3324-4757-B517-3FD49DC928A4}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GeneratePrimes_tests", "GeneratePrimes_tests\GeneratePrimes_tests.vcxproj", "{30DD0FB5-3324-4757-B517-3FD49DC928A4}"
 EndProject
