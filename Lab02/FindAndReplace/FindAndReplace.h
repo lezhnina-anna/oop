@@ -1,4 +1,4 @@
 #pragma once
 #include <string>
 
-std::string FindAndReplace(std::string text, const std::string stringToSearch, std::string stringToReplace);
+std::string FindAndReplace(const std::string & text, const std::string & stringToSearch, const std::string & stringToReplace);

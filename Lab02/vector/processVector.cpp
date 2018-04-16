@@ -10,12 +10,14 @@ void ProcessVector(std::vector<double>& numbers)
 		double minNumber = *result.first;
 		double maxNumber = *result.second;
 
-		auto processNumber = [&minNumber, &maxNumber](double number) {
-			if (maxNumber == 0)
-			{
-				return (number * minNumber);
-			}
-			return (number * minNumber / maxNumber);
+		double argument = minNumber;
+		if (maxNumber != 0)
+		{
+			argument = minNumber / maxNumber;
+		}
+
+		auto processNumber = [&minNumber, &maxNumber, &argument](double number) {
+			return (number * argument);
 		};
 
 		std::transform(numbers.begin(), numbers.end(), numbers.begin(), processNumber);
