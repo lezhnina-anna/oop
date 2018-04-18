@@ -36,6 +36,7 @@ BOOST_AUTO_TEST_SUITE(GeneratePrimeNumbersSet_function)
 		BOOST_CHECK(SetsAreEqual(expectedSet, outputSet));
 	}
 
+	#ifndef _DEBUG  
 	BOOST_AUTO_TEST_CASE(check_execution_time_and_output_set_size_with_max_upper_bound)
 	{
 		const int upperBound = 100000000;
@@ -51,5 +52,6 @@ BOOST_AUTO_TEST_SUITE(GeneratePrimeNumbersSet_function)
 		const int EXPECTED_SIZE = 5761455;
 		BOOST_CHECK(SetsSizesAreEqual(EXPECTED_SIZE, numbersSet.size()));
 }
+	#endif
 
 BOOST_AUTO_TEST_SUITE_END()

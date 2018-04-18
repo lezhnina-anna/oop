@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void main()
+int main()
 {
 	CTVSet tv;
 	CRemoteControl remoteControl(tv, cin, cout);
@@ -13,9 +13,11 @@ void main()
 	while (!cin.eof() && !cin.fail())
 	{
 		cout << "> ";
-		if (!remoteControl.HandleCommand())
+		if (!remoteControl.HandleCommand() && !cin.eof())
 		{
 			cout << "Unknown command!" << endl;
 		}
 	}
+
+	return 0;
 }

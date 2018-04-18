@@ -56,8 +56,9 @@ bool CRemoteControl::SelectChannel(std::istream& args)
 	else
 	{
 		m_output << "Channel selected\n";
-		return true;
 	}
+
+	return true;
 }
 
 bool CRemoteControl::SelectPreviousChannel(std::istream&)
@@ -70,8 +71,9 @@ bool CRemoteControl::SelectPreviousChannel(std::istream&)
 	{
 		m_tv.SelectPreviousChannel();
 		m_output << "Channel selected\n" ;
-		return true;
 	}
+
+	return true;
 }
 
 bool CRemoteControl::HandleCommand()

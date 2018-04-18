@@ -13,7 +13,7 @@ bool Translate(const DictionaryMap& dictionary, const std::string& wordToTransla
 	return false;
 }
 
-bool AskToTranslation(const std::string& wordToTranslate, std::string& translation)
+bool AskForTranslation(const std::string& wordToTranslate, std::string& translation)
 {
 	std::cout << "Неизвестное слово " << wordToTranslate << ". Введите перевод или пустую строку для отказа."
 			  << "\n";
@@ -31,14 +31,13 @@ bool AskToTranslation(const std::string& wordToTranslate, std::string& translati
 
 void AddTranslation(DictionaryMap& dictionary, const std::string& wordToTranslate, const std::string& translation)
 {
-	dictionary.insert(std::pair<std::string, std::string>(wordToTranslate, translation));
+	dictionary.emplace(std::make_pair(wordToTranslate, translation));
 	std::cout << "Слово " << wordToTranslate << " сохранено в словаре как " << translation << "\n";
 }
 
-bool ProcessDataWithChanges(DictionaryMap& dictionary)
+bool InteractionWithUser(DictionaryMap& dictionary)
 {
 	//взаимодействие с пользователем
-
 	std::string EXIT = "...";
 	bool changes = false;
 	std::string wordToTranslate;
@@ -49,7 +48,7 @@ bool ProcessDataWithChanges(DictionaryMap& dictionary)
 		{
 			std::string translation;
 
-			if (AskToTranslation(wordToTranslate, translation))
+			if (AskForTranslation(wordToTranslate, translation))
 			{
 				AddTranslation(dictionary, wordToTranslate, translation);
 				changes = true;

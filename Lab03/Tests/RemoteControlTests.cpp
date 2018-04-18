@@ -96,10 +96,9 @@ BOOST_AUTO_TEST_CASE(cant_select_an_invalid_channel_when_tv_is_on)
 BOOST_AUTO_TEST_CASE(can_select_previous_channel_when_tv_is_on)
 {
 	tv.TurnOn();
-	tv.SelectChannel(12);
-	tv.SelectChannel(45);
-	tv.SelectPreviousChannel();
-	VerifyCommandHandling("SelectPreviousChannel", 12, "Channel selected\n");
+	tv.SelectChannel(10);
+	tv.SelectChannel(20);
+	VerifyCommandHandling("SelectPreviousChannel", 10, "Channel selected\n");
 }
 
 BOOST_AUTO_TEST_CASE(cant_select_previous_channel_when_tv_is_off)

@@ -16,7 +16,7 @@ void ProcessVector(std::vector<double>& numbers)
 			argument /= maxNumber;
 		}
 
-		auto processNumber = [&minNumber, &maxNumber, &argument](double number) {
+		auto processNumber = [&argument](double number) {
 			return (number * argument);
 		};
 
