@@ -13,7 +13,7 @@ void ProcessVector(std::vector<double>& numbers)
 		double argument = minNumber;
 		if (maxNumber != 0)
 		{
-			argument = minNumber / maxNumber;
+			argument /= maxNumber;
 		}
 
 		auto processNumber = [&minNumber, &maxNumber, &argument](double number) {
