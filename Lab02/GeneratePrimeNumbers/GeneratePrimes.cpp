@@ -5,37 +5,37 @@ const int MIN_VALUE = 2;
 
 std::vector<bool> GeneratePrimeNumbers(const int upperBound)
 {
-	std::vector<bool> primes(upperBound + 1, true);
+	std::vector<bool> isPrimes(upperBound + 1, true);
 
 	if (upperBound > MAX_VALUE || upperBound < MIN_VALUE)
 	{
-		return primes = {};
+		return isPrimes = {};
 	}
 
-	primes[0] = primes[1] = false;
+	isPrimes[0] = isPrimes[1] = false;
 
-	for (size_t i = 2; i * i < primes.size(); ++i)
+	for (unsigned int i = 2; i * i < isPrimes.size(); ++i)
 	{
-		if (primes[i])
+		if (isPrimes[i])
 		{
-			for (size_t j = i * i; j < primes.size(); j += i)
+			for (unsigned int j = i * i; j < isPrimes.size(); j += i)
 			{
-				primes[j] = false;
+				isPrimes[j] = false;
 			}
 		}
 	}
 
-	return primes;
+	return isPrimes;
 }
 
 std::set<int> GeneratePrimeNumbersSet(const int upperBound)
 {
-	std::vector<bool> primesVector = GeneratePrimeNumbers(upperBound);
+	std::vector<bool> isPrime = GeneratePrimeNumbers(upperBound);
 	std::set<int> primesSet;
 
-	for (size_t i = 0; i < primesVector.size(); ++i)
+	for (unsigned int i = 0; i < isPrime.size(); ++i)
 	{
-		if (primesVector[i])
+		if (isPrime[i])
 		{
 			primesSet.insert(primesSet.end(), i);
 		}
