@@ -28,7 +28,7 @@ std::vector<bool> GeneratePrimeNumbers(const int upperBound)
 	return primes;
 }
 
-std::set<int> GeneratePrimeNumbersSet(int upperBound)
+std::set<int> GeneratePrimeNumbersSet(const int upperBound)
 {
 	std::vector<bool> primesVector = GeneratePrimeNumbers(upperBound);
 	std::set<int> primesSet;
