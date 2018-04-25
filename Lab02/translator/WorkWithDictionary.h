@@ -2,6 +2,7 @@
 #include "stdafx.h"
 
 using DictionaryMap = std::map <std::string, std::string>;
+
 bool NeedToSave();
 bool InteractionWithUser(DictionaryMap & dictionary);
 void AddTranslation(DictionaryMap & dictionary, const std::string & wordToTranslate, const std::string & translation);

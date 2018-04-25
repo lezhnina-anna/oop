@@ -21,7 +21,7 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="translator.h">
+    <ClInclude Include="WorkWithDictionary.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

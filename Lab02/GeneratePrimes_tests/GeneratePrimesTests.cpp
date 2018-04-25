@@ -9,7 +9,6 @@ bool SetsAreEqual(std::set<int> & x, std::set<int> & y)
 
 bool SetsSizesAreEqual(size_t x, size_t y)
 {
-
 	return x == y;
 }
 

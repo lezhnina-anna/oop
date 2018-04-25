@@ -9,7 +9,7 @@ std::vector<bool> GeneratePrimeNumbers(const int upperBound)
 
 	if (upperBound > MAX_VALUE || upperBound < MIN_VALUE)
 	{
-		return isPrimes = {};
+		return {};
 	}
 
 	isPrimes[0] = isPrimes[1] = false;
@@ -30,12 +30,12 @@ std::vector<bool> GeneratePrimeNumbers(const int upperBound)
 
 std::set<int> GeneratePrimeNumbersSet(const int upperBound)
 {
-	std::vector<bool> isPrime = GeneratePrimeNumbers(upperBound);
+	auto primeNumbers = GeneratePrimeNumbers(upperBound);
 	std::set<int> primesSet;
 
-	for (unsigned int i = 0; i < isPrime.size(); ++i)
+	for (unsigned int i = 0; i < primeNumbers.size(); ++i)
 	{
-		if (isPrime[i])
+		if (primeNumbers[i])
 		{
 			primesSet.insert(primesSet.end(), i);
 		}
