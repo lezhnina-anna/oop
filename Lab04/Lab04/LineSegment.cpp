@@ -21,17 +21,15 @@ double CLineSegment::GetPerimeter() const
 		+ pow((m_endPoint.y - m_startPoint.y), 2));
 }
 
-std::string CLineSegment::ToString() const
+void CLineSegment::AppendProperties(std::ostream & strm) const
 {
 	std::string info = "Shape Type : Line\n";
 	info += "Start Point: " + m_startPoint.ToString()
 		+ "\nEnd Point is: " + m_endPoint.ToString()
 		+ "\nPerimeter: " + std::to_string(GetPerimeter())
-		+ "\nArea: 0"
-		+ "\nColor: " + GetOutlineColor();
-	return info;
+		+ "\nArea: 0";
+	strm << info << std::endl;
 }
-
 CPoint CLineSegment::GetStartPoint() const
 {
 	return m_startPoint;

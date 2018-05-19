@@ -91,13 +91,13 @@ std::shared_ptr<IShape> MakeFigure(std::string & figureInfo)
 std::shared_ptr<IShape> FindFigureWithMaxArea(std::vector<std::shared_ptr<IShape>> & figures)
 {
 	return *max_element(figures.begin(), figures.end(), [](auto& left, auto& right) -> bool {
-	return left->GetArea() < right->GetArea();
+		return left->GetArea() < right->GetArea();
 	});
 }
 
 std::shared_ptr<IShape> FindFigureWithMinPerimeter( std::vector<std::shared_ptr<IShape>> & figures)
 {
 	return *min_element(figures.begin(), figures.end(), [](auto& left, auto& right) -> bool {
-	return left->GetPerimeter() < right->GetPerimeter();
+		return left->GetPerimeter() < right->GetPerimeter();
 	});
 }

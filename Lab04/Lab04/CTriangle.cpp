@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "CTriangle.h"
 
-double getSideLen(const CPoint & v1, const CPoint & v2)
+double CTriangle::getSideLen(const CPoint & v1, const CPoint & v2) const
 {
 	return sqrt(pow((v1.x - v2.x), 2)
 		+ pow((v1.y - v2.y), 2));
@@ -35,17 +35,16 @@ double CTriangle::GetPerimeter() const
 	return perimeter;
 }
 
-std::string CTriangle::ToString() const
+void CTriangle::AppendProperties(std::ostream & strm) const
 {
 	std::string info = "Shape Type : Triangle\n";
 	info += "First Vertex: " + m_vertex1.ToString()
 		+ "\nSecond Vertex: " + m_vertex2.ToString()
 		+ "\nThird Vertex: " + m_vertex3.ToString()
 		+ "\nPerimeter: " + std::to_string(GetPerimeter())
-		+ "\nArea: " + std::to_string(GetArea())
-		+ "\nOutline Color: " + CShape::GetOutlineColor()
-		+ "\nFill Color: " + GetFillColor();
-	return info;
+		+ "\nArea: " + std::to_string(GetArea());
+
+	strm << info << std::endl;
 }
 
 CPoint CTriangle::GetVertex1() const

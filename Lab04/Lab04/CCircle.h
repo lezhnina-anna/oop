@@ -8,15 +8,16 @@ class CCircle : public CSolidShape
 public:
 	CCircle(CPoint center, double radius, const std::string & fillColor, const std::string& outlineColor);
 
-	virtual double GetArea() const override;
-	virtual double GetPerimeter() const override;
-	virtual std::string ToString() const override;
+	double GetArea() const override;
+	double GetPerimeter() const override;
 
 	CPoint GetCenter() const;
 	double GetRadius() const;
 
 	void SetCenter(CPoint center);
 	void SetRadius(double radius);
+protected:
+	void AppendProperties(std::ostream & strm) const override;
 private:
 	CPoint m_center;
 	double m_radius;

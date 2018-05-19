@@ -53,5 +53,8 @@
     <ClCompile Include="..\Lab04\CSolidShape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\Lab04\ProcessFigures.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -170,6 +170,7 @@
     <ClCompile Include="..\Lab04\CSolidShape.cpp" />
     <ClCompile Include="..\Lab04\CTriangle.cpp" />
     <ClCompile Include="..\Lab04\LineSegment.cpp" />
+    <ClCompile Include="..\Lab04\ProcessFigures.cpp" />
     <ClCompile Include="Lab_04_tests.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

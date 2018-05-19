@@ -10,3 +10,11 @@ void CShape::SetOutlineColor(const std::string & color)
 {
 	m_outlineColor = color;
 }
+
+std::string CShape::ToString() const
+{
+	std::ostringstream strm;
+	strm << +"\nOutline Color: " << GetOutlineColor()  << std::endl;
+	AppendProperties(strm);
+	return strm.str();
+}

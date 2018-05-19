@@ -19,13 +19,3 @@ bool operator==(CPoint left, CPoint right)
 {
 	return (left.x == right.x && left.y == right.y) ? true : false;
 }
-
-std::istream& operator>>(std::istream& in, CPoint& value)
-{
-	double x = 0, y = 0;
-	in >> x >> y;
-	value.x = x;
-	value.y = y;
-
-	return in;
-}

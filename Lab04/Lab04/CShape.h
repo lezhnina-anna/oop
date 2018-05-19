@@ -7,6 +7,9 @@ class CShape
 public:
 	std::string GetOutlineColor() const override;
 	void SetOutlineColor(const std::string & color);
+	std::string ToString() const override;
+protected:
+	virtual void AppendProperties(std::ostream & strm) const = 0;
 private:
 	std::string m_outlineColor;
 };

@@ -112,6 +112,7 @@ const CRational CRational::operator+=(const CRational& value)
 	m_denominator = newDenominator;
 	m_numerator = m_numerator * lMultiplier + value.m_numerator * rMultiplier;
 
+	ReduceFraction(*this);
 	return *this;
 }
 
@@ -128,7 +129,12 @@ const CRational CRational::operator*=(const CRational& value)
 
 const CRational CRational::operator/=(const CRational& value)
 {
-	CRational storage(m_numerator * value.m_denominator, m_denominator * value.m_numerator);
+	CRational firstMultiplier(m_numerator, value.m_numerator);
+	CRational secondMultiplier(value.m_denominator, m_denominator);
+
+	CRational storage(firstMultiplier.m_numerator * secondMultiplier.m_numerator, 
+		firstMultiplier.m_denominator * secondMultiplier.m_denominator);
+
 	return *this = storage;
 }
 
@@ -144,7 +150,11 @@ bool operator!=(const CRational& lvalue, const CRational& rvalue)
 
 bool operator<(const CRational& lvalue, const CRational& rvalue)
 {
-	return (lvalue.ToDouble() - rvalue.ToDouble() < 0);
+	int newDenominator = std::lcm(lvalue.m_denominator, rvalue.m_denominator);
+	int lMultiplier = newDenominator / lvalue.m_denominator;
+	int rMultiplier = newDenominator / rvalue.m_denominator;
+
+	return (lvalue.m_numerator*lMultiplier < rvalue.m_numerator*rMultiplier);
 }
 
 bool operator>(const CRational& lvalue, const CRational& rvalue)

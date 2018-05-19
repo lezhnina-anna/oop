@@ -20,7 +20,7 @@ double CRectangle::GetPerimeter() const
 	return 2*(m_height+m_width);
 }
 
-std::string CRectangle::ToString() const
+void CRectangle::AppendProperties(std::ostream & strm) const
 {
 	std::string info = "Shape Type : Rectangle\n";
 	info += "Left Top Vertex: " + m_leftTop.ToString()
@@ -28,10 +28,8 @@ std::string CRectangle::ToString() const
 		+ "\nWidth: " + std::to_string(GetWidth())
 		+ "\nHeight: " + std::to_string(GetHeight())
 		+ "\nPerimeter: " + std::to_string(GetPerimeter())
-		+ "\nArea: " + std::to_string(GetArea())
-		+ "\nOutline Color: " + CShape::GetOutlineColor()
-		+ "\nFill Color: " + GetFillColor();
-	return info;
+		+ "\nArea: " + std::to_string(GetArea());
+	strm << info << std::endl;
 }
 
 CPoint CRectangle::GetLeftTop() const

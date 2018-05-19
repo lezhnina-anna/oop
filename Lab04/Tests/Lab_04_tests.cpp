@@ -5,6 +5,7 @@
 #include "..\Lab04\CTriangle.h"
 #include "..\Lab04\CRectangle.h"
 #include "..\Lab04\CCircle.h"
+#include "..\Lab04\ProcessFigures.h"
 #include <sstream>
 
 bool PointsAreEqual(const CPoint& first, const CPoint &second)
@@ -18,9 +19,9 @@ BOOST_AUTO_TEST_SUITE(Point)
 BOOST_AUTO_TEST_CASE(GetCoord)
 {
 	CPoint point(1, -1);
-	/*
-	BOOST_CHECK_EQUAL(point.GetX(), 1);
-	BOOST_CHECK_EQUAL(point.GetY(), -1);*/
+	
+	BOOST_CHECK_EQUAL(point.x, 1);
+	BOOST_CHECK_EQUAL(point.y, -1);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
@@ -71,7 +72,6 @@ BOOST_AUTO_TEST_CASE(make_new_correct_circle)
 	BOOST_CHECK_EQUAL(circle.GetRadius(), radius);
 	BOOST_CHECK_EQUAL(circle.GetFillColor(), fillColor);
 	BOOST_CHECK_EQUAL(circle.GetOutlineColor(), outlineColor);
-//	circle.GetOutlineColor();
 
 }
 
@@ -148,23 +148,76 @@ BOOST_AUTO_TEST_CASE(can_change_vertex)
 
 BOOST_AUTO_TEST_SUITE_END()
 
-/*
-CPoint point(1, 0);
-std::cout << point.x << " " << point.y;
+//прямоугольник
+BOOST_AUTO_TEST_SUITE(Rectangle)
 
-CLineSegment line(point, point, "red");
-std::cout << line.ToString() << "\n";
+CPoint point(1, 1);
+double width = 10;
+double height = 5;
+std::string fillColor = "red";
+std::string outlineColor = "red";
 
-CRectangle newR(point, 10, 10, "red", "green");
-std::cout << newR.ToString() << "\n";
+CRectangle rec(point, width, height, fillColor, outlineColor);
 
-CPoint point1(5, 0);
-CPoint point2(3, 10);
+BOOST_AUTO_TEST_CASE(make_new_correct_rectangle)
+{
+	BOOST_CHECK(PointsAreEqual(rec.GetLeftTop(), point));
+	BOOST_CHECK_EQUAL(rec.GetHeight(), 5);
+	BOOST_CHECK_EQUAL(rec.GetWidth(), 10);
+	BOOST_CHECK_EQUAL(rec.GetOutlineColor(), outlineColor);
+	BOOST_CHECK_EQUAL(rec.GetFillColor(), fillColor);
+}
 
-CTriangle newT(point, point1, point2, "black", "pink");
-std::cout << newT.ToString() << "\n";
+BOOST_AUTO_TEST_CASE(get_area_and_perimeter)
+{
 
-CCircle newC(point, 20, "blue", "white");
-std::cout << newC.ToString() << "\n"; 
+	double area = width*height;
+	double perimeter = 2*(width+height);
 
-*/
+	BOOST_CHECK_EQUAL(rec.GetArea(), area);
+	BOOST_CHECK_EQUAL(rec.GetPerimeter(), perimeter);
+}
+
+BOOST_AUTO_TEST_CASE(can_change_width_and_height)
+{
+	double newWidth = 1;
+	double newHeight = 10;
+	rec.SetWidth(newWidth);
+	rec.SetHeight(newHeight);
+	BOOST_CHECK_EQUAL(rec.GetWidth(), newWidth);
+	BOOST_CHECK_EQUAL(rec.GetHeight(), newHeight);
+} 
+
+BOOST_AUTO_TEST_CASE(can_change_left_top)
+{
+	CPoint point(3, 2);
+	rec.SetLeftTop(point);
+	BOOST_CHECK(PointsAreEqual(rec.GetLeftTop(), point));
+}
+
+BOOST_AUTO_TEST_SUITE_END()
+
+BOOST_AUTO_TEST_SUITE(Find_figure_with_max_area_and_min_perimeter)
+
+std::vector<std::shared_ptr<IShape>> figures;
+std::string circleInfo = "circle 2 2 1 red white";
+std::string rectangleInfo = "rectangle 2 2 5 10 red white";
+
+BOOST_AUTO_TEST_CASE(max_area)
+{
+	figures.push_back(MakeFigure(circleInfo));
+	figures.push_back(MakeFigure(rectangleInfo));
+	double maxArea = FindFigureWithMaxArea(figures)->GetArea();
+	BOOST_CHECK_EQUAL(maxArea, 50);
+}
+
+BOOST_AUTO_TEST_CASE(min_perimeter)
+{
+	const double PI = 3.14159265;
+	double radius = 1;
+	figures.push_back(MakeFigure(circleInfo));
+	figures.push_back(MakeFigure(rectangleInfo));
+	double minPerimeter = FindFigureWithMinPerimeter(figures)->GetPerimeter();
+	BOOST_CHECK_EQUAL(minPerimeter, 2* PI *radius);
+}
+BOOST_AUTO_TEST_SUITE_END()

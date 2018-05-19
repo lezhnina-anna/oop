@@ -4,10 +4,12 @@
 class CSolidShape : public CShape, public ISolidShape
 {
 public:
-	//setter
 	std::string GetFillColor() const override;
-
-	void SetFillColor(const std::string & color);
+	void SetFillColor(const std::string & color) override;
+	std::string ToString() const override;
+protected:
+	void AppendProperties(std::ostream & strm) const = 0;
 private:
 	std::string m_fillColor;
 };
+

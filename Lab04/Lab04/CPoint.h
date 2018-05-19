@@ -14,4 +14,3 @@ public:
 };
 
 bool operator==(CPoint left, CPoint right);
-std::istream& operator>>(std::istream&, CPoint&);
