@@ -123,7 +123,13 @@ const CRational CRational::operator-=(const CRational& value)
 
 const CRational CRational::operator*=(const CRational& value)
 {
-	CRational storage(m_numerator * value.m_numerator, m_denominator * value.m_denominator);
+
+	CRational firstMultiplier(m_numerator, value.m_denominator);
+	CRational secondMultiplier(value.m_numerator, m_denominator);
+
+	CRational storage(firstMultiplier.m_numerator * secondMultiplier.m_numerator,
+		firstMultiplier.m_denominator * secondMultiplier.m_denominator);
+
 	return *this = storage;
 }
 

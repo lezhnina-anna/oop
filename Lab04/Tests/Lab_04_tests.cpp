@@ -75,6 +75,22 @@ BOOST_AUTO_TEST_CASE(make_new_correct_circle)
 
 }
 
+BOOST_AUTO_TEST_CASE(to_string)
+{
+	std::ostringstream strm;
+
+	strm << "Outline Color: " << circle.GetOutlineColor()
+		<< "\nFill Color: " << circle.GetFillColor() << "\n"
+		<< "Shape Type : Circle\n"
+		<< "Center: " + circle.GetCenter().ToString()
+		<< "\nRadius: " + std::to_string(circle.GetRadius())
+		<< "\nPerimeter: " + std::to_string(circle.GetPerimeter())
+		<< "\nArea: " + std::to_string(circle.GetArea())
+		<< std::endl;
+
+	BOOST_CHECK_EQUAL(strm.str(), circle.ToString());
+}
+
 BOOST_AUTO_TEST_CASE(get_area_and_perimeter)
 {
 
@@ -102,9 +118,10 @@ BOOST_AUTO_TEST_SUITE_END()
 //треугольник
 BOOST_AUTO_TEST_SUITE(Triangle)
 
-CPoint v1(0, 0);
-CPoint v2(1, 0);
-CPoint v3(0, 1);
+
+CPoint v1(0, 3);
+CPoint v2(4, 0);
+CPoint v3(0, 0);
 
 
 std::string fillColor = "red";
@@ -121,16 +138,12 @@ BOOST_AUTO_TEST_CASE(make_new_correct_triangle)
 	BOOST_CHECK_EQUAL(triangle.GetOutlineColor(), outlineColor);
 
 }
-/*
+
 BOOST_AUTO_TEST_CASE(get_area_and_perimeter)
 {
-
-	double area = 3.14159265*radius*radius;
-	double perimeter = 3.14159265*radius * 2;
-
-	BOOST_CHECK_EQUAL(triangle.GetArea(), area);
-	BOOST_CHECK_EQUAL(triangle.GetPerimeter(), perimeter);
-}*/
+	BOOST_CHECK_EQUAL(triangle.GetArea(), 6);
+	BOOST_CHECK_EQUAL(triangle.GetPerimeter(), 12);
+}
 
 BOOST_AUTO_TEST_CASE(can_change_vertex)
 {
@@ -144,6 +157,23 @@ BOOST_AUTO_TEST_CASE(can_change_vertex)
 
 	triangle.SetVertex3(newV3);
 	BOOST_CHECK(PointsAreEqual(triangle.GetVertex3(), newV3));
+}
+
+BOOST_AUTO_TEST_CASE(to_string)
+{
+	std::ostringstream strm;
+
+	strm << "Outline Color: " << triangle.GetOutlineColor()
+		<< "\nFill Color: " << triangle.GetFillColor() << "\n"
+		<< "Shape Type : Triangle\n"
+		<< "First Vertex: " + triangle.GetVertex1().ToString()
+	    << "\nSecond Vertex: " + triangle.GetVertex2().ToString()
+		<< "\nThird Vertex: " + triangle.GetVertex3().ToString()
+		<< "\nPerimeter: " + std::to_string(triangle.GetPerimeter())
+		<< "\nArea: " + std::to_string(triangle.GetArea())
+	    << std::endl;
+
+	BOOST_CHECK_EQUAL(strm.str(), triangle.ToString());
 }
 
 BOOST_AUTO_TEST_SUITE_END()
@@ -166,6 +196,29 @@ BOOST_AUTO_TEST_CASE(make_new_correct_rectangle)
 	BOOST_CHECK_EQUAL(rec.GetWidth(), 10);
 	BOOST_CHECK_EQUAL(rec.GetOutlineColor(), outlineColor);
 	BOOST_CHECK_EQUAL(rec.GetFillColor(), fillColor);
+}
+
+BOOST_AUTO_TEST_CASE(to_string)
+{
+	std::ostringstream strm;
+
+	strm << "Outline Color: " << rec.GetOutlineColor()
+		<< "\nFill Color: " << rec.GetFillColor() << "\n"
+		<< "Shape Type : Rectangle\n"
+		<<"Left Top Vertex: " + rec.GetLeftTop().ToString()
+		<< "\nRight Bottom Vertex: " + rec.GetRightBottom().ToString()
+		<< "\nWidth: " + std::to_string(rec.GetWidth())
+		<< "\nHeight: " + std::to_string(rec.GetHeight())
+		<< "\nPerimeter: " + std::to_string(rec.GetPerimeter())
+		<< "\nArea: " + std::to_string(rec.GetArea())
+		<< std::endl;
+
+	BOOST_CHECK_EQUAL(strm.str(), rec.ToString());
+}
+
+BOOST_AUTO_TEST_CASE(get_right_bottom)
+{
+	BOOST_CHECK(PointsAreEqual(rec.GetRightBottom(), CPoint(11, -4)));
 }
 
 BOOST_AUTO_TEST_CASE(get_area_and_perimeter)
@@ -221,3 +274,4 @@ BOOST_AUTO_TEST_CASE(min_perimeter)
 	BOOST_CHECK_EQUAL(minPerimeter, 2* PI *radius);
 }
 BOOST_AUTO_TEST_SUITE_END()
+

@@ -206,6 +206,7 @@ BOOST_AUTO_TEST_CASE(equality_and_not_equality)
 	CRational copyValue(2, 3);
 	BOOST_CHECK_EQUAL(value, copyValue);
 	BOOST_CHECK(value != CRational(1, 9));
+	BOOST_CHECK(!(value == 3));
 }
 
 BOOST_AUTO_TEST_CASE(greater)
@@ -214,13 +215,16 @@ BOOST_AUTO_TEST_CASE(greater)
 	CRational rvalue(1, 3);
 	BOOST_CHECK_GE(lvalue, rvalue);
 	BOOST_CHECK(lvalue > rvalue);
+	BOOST_CHECK(!(rvalue > lvalue));
+	BOOST_CHECK(!(-5 > rvalue));
 }
 
 BOOST_AUTO_TEST_CASE(less)
 {
 	CRational lvalue(1, 3);
 	CRational rvalue(2, 3);
-	BOOST_CHECK_LE(lvalue, rvalue);
+	BOOST_CHECK(!(rvalue < lvalue));
+	BOOST_CHECK(!(1 < rvalue));
 }
 
 BOOST_AUTO_TEST_CASE(less_or_equal)

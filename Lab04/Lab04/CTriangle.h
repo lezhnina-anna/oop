@@ -22,5 +22,5 @@ protected:
 	void AppendProperties(std::ostream & strm) const override;
 private:
 	CPoint m_vertex1, m_vertex2, m_vertex3;
-	double getSideLen(const CPoint & v1, const CPoint & v2) const;
+	double GetSideLen(const CPoint & v1, const CPoint & v2) const;
 };

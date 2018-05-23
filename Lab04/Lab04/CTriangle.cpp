@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "CTriangle.h"
 
-double CTriangle::getSideLen(const CPoint & v1, const CPoint & v2) const
+double CTriangle::GetSideLen(const CPoint & v1, const CPoint & v2) const
 {
 	return sqrt(pow((v1.x - v2.x), 2)
 		+ pow((v1.y - v2.y), 2));
@@ -19,18 +19,18 @@ CTriangle::CTriangle(CPoint vertex1, CPoint vertex2, CPoint vertex3, const std::
 double CTriangle::GetArea() const
 {
 	double p = GetPerimeter()/2;
-	double a = getSideLen(m_vertex1, m_vertex2);
-	double b = getSideLen(m_vertex2, m_vertex3);
-	double c = getSideLen(m_vertex3, m_vertex1);
+	double a = GetSideLen(m_vertex1, m_vertex2);
+	double b = GetSideLen(m_vertex2, m_vertex3);
+	double c = GetSideLen(m_vertex3, m_vertex1);
 
 	return sqrt(p*(p-a)*(p-b)*(p-c));
 }
 
 double CTriangle::GetPerimeter() const
 {
-	double perimeter = getSideLen(m_vertex1, m_vertex2) 
-		+ getSideLen(m_vertex2, m_vertex3)
-		+ getSideLen(m_vertex3, m_vertex1);
+	double perimeter = GetSideLen(m_vertex1, m_vertex2) 
+		+ GetSideLen(m_vertex2, m_vertex3)
+		+ GetSideLen(m_vertex3, m_vertex1);
 
 	return perimeter;
 }
