@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "CTriangle.h"
 
-double CTriangle::GetSideLen(const CPoint & v1, const CPoint & v2) const
+double CTriangle::GetSideLen(const CPoint & v1, const CPoint & v2) 
 {
 	return sqrt(pow((v1.x - v2.x), 2)
 		+ pow((v1.y - v2.y), 2));

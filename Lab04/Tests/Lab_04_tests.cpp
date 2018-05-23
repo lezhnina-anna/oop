@@ -39,6 +39,25 @@ BOOST_AUTO_TEST_CASE(get_area_and_perimeter)
 	BOOST_CHECK_EQUAL(line.GetPerimeter(), 2);
 }
 
+BOOST_AUTO_TEST_CASE(to_string)
+{
+	CPoint start(0, 0);
+	CPoint end(0, 2);
+	std::string color = "red";
+
+	CLineSegment line(start, end, color);
+	std::ostringstream strm;
+
+	strm << "Outline Color: " << line.GetOutlineColor() << "\n"
+		<< "Shape Type : Line\n"
+		<< "Start Point: " + line.GetStartPoint().ToString()
+		<< "\nEnd Point is: " + line.GetEndPoint().ToString()
+		<< "\nPerimeter: " + std::to_string(line.GetPerimeter())
+		<< "\nArea: 0" << std::endl;
+
+	BOOST_CHECK_EQUAL(strm.str(), line.ToString());
+}
+
 BOOST_AUTO_TEST_CASE(can_change_start_point_and_end_point)
 {
 	CPoint start(0, 0);

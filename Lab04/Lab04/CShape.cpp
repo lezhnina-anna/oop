@@ -14,7 +14,7 @@ void CShape::SetOutlineColor(const std::string & color)
 std::string CShape::ToString() const
 {
 	std::ostringstream strm;
-	strm << +"\nOutline Color: " << GetOutlineColor()  << std::endl;
+	strm << +"Outline Color: " << GetOutlineColor()  << std::endl;
 	AppendProperties(strm);
 	return strm.str();
 }

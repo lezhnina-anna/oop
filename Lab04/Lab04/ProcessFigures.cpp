@@ -90,6 +90,11 @@ std::shared_ptr<IShape> MakeFigure(std::string & figureInfo)
 
 std::shared_ptr<IShape> FindFigureWithMaxArea(std::vector<std::shared_ptr<IShape>> & figures)
 {
+	if (figures.empty())
+	{
+		return nullptr;
+	}
+
 	return *max_element(figures.begin(), figures.end(), [](auto& left, auto& right) -> bool {
 		return left->GetArea() < right->GetArea();
 	});
@@ -97,6 +102,11 @@ std::shared_ptr<IShape> FindFigureWithMaxArea(std::vector<std::shared_ptr<IShape
 
 std::shared_ptr<IShape> FindFigureWithMinPerimeter( std::vector<std::shared_ptr<IShape>> & figures)
 {
+	if (figures.empty())
+	{
+		return nullptr;
+	}
+
 	return *min_element(figures.begin(), figures.end(), [](auto& left, auto& right) -> bool {
 		return left->GetPerimeter() < right->GetPerimeter();
 	});

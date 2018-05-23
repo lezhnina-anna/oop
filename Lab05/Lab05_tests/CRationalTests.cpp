@@ -1,10 +1,5 @@
 #include "stdafx.h"
 #include "../Lab05/CRational.h"
-bool equal(CRational & first, CRational & second)
-{
-	return (first.GetNumerator() == second.GetNumerator() and
-		first.GetDenominator() == second.GetDenominator());
-}
 
 BOOST_AUTO_TEST_SUITE(make_new_rational)
 
@@ -205,31 +200,34 @@ BOOST_AUTO_TEST_CASE(equality_and_not_equality)
 	CRational value(2, 3);
 	CRational copyValue(2, 3);
 	BOOST_CHECK_EQUAL(value, copyValue);
-	BOOST_CHECK(value != CRational(1, 9));
 	BOOST_CHECK(!(value == 3));
+	BOOST_CHECK(value != CRational(1, 9));
+	BOOST_CHECK(!(value != copyValue));
+
 }
 
 BOOST_AUTO_TEST_CASE(greater)
 {
 	CRational lvalue(2, 3);
 	CRational rvalue(1, 3);
-	BOOST_CHECK_GE(lvalue, rvalue);
 	BOOST_CHECK(lvalue > rvalue);
 	BOOST_CHECK(!(rvalue > lvalue));
-	BOOST_CHECK(!(-5 > rvalue));
+	BOOST_CHECK(!(CRational(1, 3) > CRational(1, 3)));
 }
 
 BOOST_AUTO_TEST_CASE(less)
 {
 	CRational lvalue(1, 3);
 	CRational rvalue(2, 3);
+	BOOST_CHECK(lvalue < rvalue);
 	BOOST_CHECK(!(rvalue < lvalue));
-	BOOST_CHECK(!(1 < rvalue));
+	BOOST_CHECK(!(CRational(1, 3) < CRational(1, 3)));
 }
 
 BOOST_AUTO_TEST_CASE(less_or_equal)
 {
 	BOOST_CHECK(CRational(-1, 3) <= 0);
+	BOOST_CHECK(!(CRational(1, 3) <= 0));
 	BOOST_CHECK_LE(CRational(-1, 3), CRational(1, 3));
 	BOOST_CHECK_LE(CRational(1, 3), CRational(1, 3));
 }
@@ -238,6 +236,7 @@ BOOST_AUTO_TEST_CASE(greater_or_equal)
 {
 	BOOST_CHECK_GE(CRational(4, 3), 1);
 	BOOST_CHECK_GE(CRational(4, 3), CRational(4, 3));
+	BOOST_CHECK(!(CRational(4, 3) >= CRational(5, 3)));
 }
 
 BOOST_AUTO_TEST_CASE(print)
