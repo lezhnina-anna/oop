@@ -1,8 +1,9 @@
 #pragma once
-#include <string>
 #include <iostream>
+#include <string>
 
-enum class Protocol {
+enum class Protocol
+{
 	HTTP,
 	HTTPS
 };
@@ -15,7 +16,6 @@ public:
 	// выбрасыват исключение CUrlParsingError, содержащее текстовое описание ошибки
 	CHttpUrl(std::string const& url);
 
-
 	/* инициализирует URL на основе переданных параметров.
 	ѕри недопустимости входных параметров выбрасывает исключение
 	std::invalid_argument
@@ -25,7 +25,6 @@ public:
 		std::string const& domain,
 		std::string const& document,
 		Protocol protocol = Protocol::HTTP);
-
 
 	/* инициализирует URL на основе переданных параметров.
 	ѕри недопустимости входных параметров выбрасывает исключение
@@ -37,7 +36,6 @@ public:
 		std::string const& document,
 		Protocol protocol,
 		unsigned short port);
-
 
 	// возвращает строковое представление URL-а. ѕорт, €вл€ющийс€ стандартным дл
 	// выбранного протокола (80 дл€ http и 443 дл€ https) в URL не должен включатьс€

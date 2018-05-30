@@ -4,149 +4,134 @@
 
 namespace
 {
-	std::string ProtocolToString(const Protocol & protocol) 
+std::string ProtocolToString(const Protocol& protocol)
+{
+	switch (protocol)
 	{
-		switch (protocol)
-		{
-		case Protocol::HTTP:
-			return "http";
-		case Protocol::HTTPS:
-			return "https";
-		default:
-			throw std::invalid_argument("Error when parsed protocol");
-		}
+	case Protocol::HTTP:
+		return "http";
+	case Protocol::HTTPS:
+		return "https";
+	default:
+		throw std::invalid_argument("Error when parsed protocol");
+	}
+}
+
+bool IsValidPort(const int port)
+{
+	return (port > 0 && port <= 65535);
+}
+
+bool IsValidDocument(const std::string& document)
+{
+	return (document.find(' ') == std::string::npos);
+}
+
+bool IsValidDomain(const std::string& domain)
+{
+	if (domain.empty())
+	{
+		throw CUrlParsingError("Empty domain");
 	}
 
-	Protocol ParseProtocol(const std::string & url);
-	std::string ParseDomain(const std::string & url);
-	unsigned short ParsePort(const std::string & url);
-	std::string ParseDocument(const std::string & url);
-
-
-	bool IsValidPort(const int port);
-	bool IsValidDocument(const std::string & document);
-	bool IsValidDomain(const std::string & domain);
-	
-
-
-	Protocol ParseProtocol(const std::string & url)
+	return (domain.find(' ') == std::string::npos);
+}
+Protocol ParseProtocol(const std::string& url)
+{
+	auto protocolEnd = url.find("://");
+	if (protocolEnd == std::string::npos)
 	{
-		auto protocolEnd = url.find("://");
-		if (protocolEnd == std::string::npos)
-		{
-			throw CUrlParsingError("Invalid protocol");
-		}
-
-		std::string protocol(url.begin(), url.begin() + protocolEnd);
-
-		if (protocol == "http")
-		{
-			return Protocol::HTTP;
-		}
-		else if (protocol == "https")
-		{
-			return Protocol::HTTPS;
-		}
-		else
-		{
-			throw CUrlParsingError("Invalid protocol");
-		}
-
+		throw CUrlParsingError("Invalid protocol");
 	}
 
-	std::string ParseDomain(const std::string & url)
+	std::string protocol(url.begin(), url.begin() + protocolEnd);
+
+	if (protocol == "http")
 	{
-		auto domainEnd = url.find(':');
+		return Protocol::HTTP;
+	}
+	else if (protocol == "https")
+	{
+		return Protocol::HTTPS;
+	}
+	else
+	{
+		throw CUrlParsingError("Invalid protocol");
+	}
+}
+
+std::string ParseDomain(const std::string& url)
+{
+	auto domainEnd = url.find(':');
+
+	if (domainEnd == std::string::npos)
+	{
+		domainEnd = url.find("/");
 
 		if (domainEnd == std::string::npos)
 		{
-			domainEnd = url.find("/");
-
-			if (domainEnd == std::string::npos)
-			{
-				domainEnd = url.length();
-			}
+			domainEnd = url.length();
 		}
-
-		std::string domain(url.begin(), url.begin() + domainEnd);
-
-		if (!IsValidDomain(domain))
-		{
-			throw CUrlParsingError("Invalid domain");
-		}
-
-		return domain;
 	}
 
-	unsigned short ParsePort(const std::string & url)
+	std::string domain(url.begin(), url.begin() + domainEnd);
+
+	if (!IsValidDomain(domain))
 	{
-		auto portEnd = url.find('/');
-
-		if (portEnd == std::string::npos)
-		{
-			portEnd = url.length();
-		}
-
-		std::string strPort(url.begin() + 1, url.begin() + portEnd);
-
-		if (strPort.find(' ') != std::string::npos)
-		{
-			throw CUrlParsingError("Unexpected symbol");
-		}
-
-		try
-		{
-			int port = stoi(strPort);
-			if (!IsValidPort(port))
-			{
-				throw CUrlParsingError("Port is out of range.");
-			}
-			return port;
-		}
-		catch (std::invalid_argument)
-		{
-			throw CUrlParsingError("Invalid port");
-		}
-
+		throw CUrlParsingError("Invalid domain");
 	}
 
-	std::string ParseDocument(const std::string & url)
-	{
-		if (url.empty())
-		{
-			return "/";
-		}
-
-		auto document = url;
-		if (!IsValidDocument(document))
-		{
-			throw CUrlParsingError("Invalid document");
-		}
-
-		return document;
-	}
-
-	bool IsValidPort(const int port)
-	{
-		return (port > 0 && port <= 65535);
-	}
-
-	bool IsValidDocument(const std::string & document)
-	{
-		return (document.find(' ') == std::string::npos);
-	}
-
-	bool IsValidDomain(const std::string & domain)
-	{
-		if (domain.empty())
-		{
-			throw CUrlParsingError("Empty domain");
-		}
-
-		return (domain.find(' ') == std::string::npos);
-	}
-
+	return domain;
 }
+
+unsigned short ParsePort(const std::string& url)
+{
+	auto portEnd = url.find('/');
+
+	if (portEnd == std::string::npos)
+	{
+		portEnd = url.length();
+	}
+
+	std::string strPort(url.begin() + 1, url.begin() + portEnd);
+
+	if (strPort.find(' ') != std::string::npos)
+	{
+		throw CUrlParsingError("Unexpected symbol");
+	}
+
+	try
+	{
+		int port = stoi(strPort);
+		if (!IsValidPort(port))
+		{
+			throw CUrlParsingError("Port is out of range.");
+		}
+		return port;
+	}
+	catch (std::invalid_argument)
+	{
+		throw CUrlParsingError("Invalid port");
+	}
+}
+
+std::string ParseDocument(const std::string& url)
+{
+	if (url.empty())
+	{
+		return "/";
+	}
+
+	auto document = url;
+	if (!IsValidDocument(document))
+	{
+		throw CUrlParsingError("Invalid document");
+	}
+
+	return document;
+}
+
+} // namespace
 
 unsigned short CHttpUrl::GetPortByProtocol() const
 {
@@ -172,7 +157,7 @@ CHttpUrl::CHttpUrl(std::string const& url)
 	if (url.empty())
 	{
 		throw CUrlParsingError("Empty url");
-	} 
+	}
 
 	m_protocol = ParseProtocol(url);
 	auto restOfUrl = url.substr(ProtocolToString(m_protocol).size() + 3, url.size() - 1);
@@ -223,7 +208,7 @@ CHttpUrl::CHttpUrl(
 		throw std::invalid_argument("Invalid url");
 	}
 }
-	
+
 std::string CHttpUrl::GetURL() const
 {
 	std::string url = ProtocolToString(m_protocol)
