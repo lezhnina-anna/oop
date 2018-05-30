@@ -69,7 +69,7 @@ private:
 	std::string ProtocolToString(const Protocol & protocol) const;
 	unsigned short GetPortByProtocol();
 
-	bool IsValidPort(unsigned short port);
+	bool IsValidPort(int port);
 	bool IsValidDocument(std::string & document);
 	bool IsValidDomain(std::string & domain);
 

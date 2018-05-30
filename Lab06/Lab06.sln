@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lab06", "Lab06\Lab06.vcxproj", "{BF51F7B7-3E73-415C-A09D-6B38C518EDCF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HttpUrl", "Lab06\Lab06.vcxproj", "{BF51F7B7-3E73-415C-A09D-6B38C518EDCF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HttpUrlTests", "HttpUrlTests\HttpUrlTests.vcxproj", "{EF9FAEA9-13B0-4967-B73C-4222599A222F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,14 @@ Global
 		{BF51F7B7-3E73-415C-A09D-6B38C518EDCF}.Release|x64.Build.0 = Release|x64
 		{BF51F7B7-3E73-415C-A09D-6B38C518EDCF}.Release|x86.ActiveCfg = Release|Win32
 		{BF51F7B7-3E73-415C-A09D-6B38C518EDCF}.Release|x86.Build.0 = Release|Win32
+		{EF9FAEA9-13B0-4967-B73C-4222599A222F}.Debug|x64.ActiveCfg = Debug|x64
+		{EF9FAEA9-13B0-4967-B73C-4222599A222F}.Debug|x64.Build.0 = Debug|x64
+		{EF9FAEA9-13B0-4967-B73C-4222599A222F}.Debug|x86.ActiveCfg = Debug|Win32
+		{EF9FAEA9-13B0-4967-B73C-4222599A222F}.Debug|x86.Build.0 = Debug|Win32
+		{EF9FAEA9-13B0-4967-B73C-4222599A222F}.Release|x64.ActiveCfg = Release|x64
+		{EF9FAEA9-13B0-4967-B73C-4222599A222F}.Release|x64.Build.0 = Release|x64
+		{EF9FAEA9-13B0-4967-B73C-4222599A222F}.Release|x86.ActiveCfg = Release|Win32
+		{EF9FAEA9-13B0-4967-B73C-4222599A222F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

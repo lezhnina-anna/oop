@@ -11,6 +11,7 @@ std::string CHttpUrl::ProtocolToString(const Protocol & protocol) const
 	case HTTPS:
 		return "https";
 	default:
+		return "";
 		break;
 	}
 }
@@ -24,11 +25,12 @@ unsigned short CHttpUrl::GetPortByProtocol()
 	case HTTPS:
 		return 443;
 	default:
+		return 1;
 		break;
 	}
 }
 
-bool CHttpUrl::IsValidPort(unsigned short port)
+bool CHttpUrl::IsValidPort(int port)
 {
 	return (port > 0 && port <= 65535);
 }
@@ -43,11 +45,6 @@ bool CHttpUrl::IsValidDomain(std::string & domain)
 	if (domain.empty())
 	{
 		throw CUrlParsingError("Empty domain");
-	}
-
-	if (domain.find('/') != std::string::npos)
-	{
-		throw CUrlParsingError("Invalid domain");
 	}
 
 	return (domain.find(' ') == std::string::npos);
@@ -179,7 +176,7 @@ unsigned short CHttpUrl::ParsePort(std::string & url)
 
 	try 
 	{
-		unsigned short port = stoi(strPort);
+		int port = stoi(strPort);
 		if (!IsValidPort(port))
 		{
 			throw CUrlParsingError("Port is out of range.");
@@ -215,13 +212,13 @@ std::string CHttpUrl::GetURL() const
 		+ "://"
 		+ m_domain;
 
-	if ((m_port != 80 && m_protocol != Protocol::HTTP)
-		&& (m_port != 443 && m_protocol != Protocol::HTTPS))
+	if ((m_port == 80 && m_protocol == Protocol::HTTP)
+		|| (m_port == 443 && m_protocol == Protocol::HTTPS))
 	{
-		url += ":" + std::to_string(m_port);
+		return url += m_document;
 	}
 
-	return url += m_document;
+	return (url += ":" + std::to_string(m_port) + m_document);
 }
 
 unsigned short CHttpUrl::GetPort() const
