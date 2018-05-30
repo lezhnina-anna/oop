@@ -128,8 +128,8 @@ BOOST_AUTO_TEST_CASE(make_correct_url)
 BOOST_AUTO_TEST_CASE(check_bound_port)
 {
 	BOOST_REQUIRE_THROW(CHttpUrl("http://vk.com:0"), CUrlParsingError);
-	BOOST_REQUIRE_NO_THROW(CHttpUrl("http://vk.com:1"), CUrlParsingError);
+	BOOST_REQUIRE_NO_THROW(CHttpUrl("http://vk.com:1"));
 	BOOST_REQUIRE_THROW(CHttpUrl("http://vk.com:65536"), CUrlParsingError);
-	BOOST_REQUIRE_NO_THROW(CHttpUrl("http://vk.com:65535"), CUrlParsingError);
+	BOOST_REQUIRE_NO_THROW(CHttpUrl("http://vk.com:65535"));
 }
 BOOST_AUTO_TEST_SUITE_END()
