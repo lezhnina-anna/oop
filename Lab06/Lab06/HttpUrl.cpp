@@ -2,72 +2,192 @@
 #include "HttpUrl.h"
 #include "UrlParsingError.h"
 
-std::string CHttpUrl::ProtocolToString(const Protocol & protocol) const
+namespace
 {
-	switch (protocol)
+	std::string ProtocolToString(const Protocol & protocol) 
 	{
-	case HTTP:
-		return "http";
-	case HTTPS:
-		return "https";
-	default:
-		return "";
-		break;
+		switch (protocol)
+		{
+		case Protocol::HTTP:
+			return "http";
+		case Protocol::HTTPS:
+			return "https";
+		default:
+			throw std::invalid_argument("Error when parsed protocol");
+		}
 	}
+
+	Protocol ParseProtocol(const std::string & url);
+	std::string ParseDomain(const std::string & url);
+	unsigned short ParsePort(const std::string & url);
+	std::string ParseDocument(const std::string & url);
+
+
+	bool IsValidPort(const int port);
+	bool IsValidDocument(const std::string & document);
+	bool IsValidDomain(const std::string & domain);
+	
+
+
+	Protocol ParseProtocol(const std::string & url)
+	{
+		auto protocolEnd = url.find("://");
+		if (protocolEnd == std::string::npos)
+		{
+			throw CUrlParsingError("Invalid protocol");
+		}
+
+		std::string protocol(url.begin(), url.begin() + protocolEnd);
+
+		if (protocol == "http")
+		{
+			return Protocol::HTTP;
+		}
+		else if (protocol == "https")
+		{
+			return Protocol::HTTPS;
+		}
+		else
+		{
+			throw CUrlParsingError("Invalid protocol");
+		}
+
+	}
+
+	std::string ParseDomain(const std::string & url)
+	{
+		auto domainEnd = url.find(':');
+
+		if (domainEnd == std::string::npos)
+		{
+			domainEnd = url.find("/");
+
+			if (domainEnd == std::string::npos)
+			{
+				domainEnd = url.length();
+			}
+		}
+
+		std::string domain(url.begin(), url.begin() + domainEnd);
+
+		if (!IsValidDomain(domain))
+		{
+			throw CUrlParsingError("Invalid domain");
+		}
+
+		return domain;
+	}
+
+	unsigned short ParsePort(const std::string & url)
+	{
+		auto portEnd = url.find('/');
+
+		if (portEnd == std::string::npos)
+		{
+			portEnd = url.length();
+		}
+
+		std::string strPort(url.begin() + 1, url.begin() + portEnd);
+
+		if (strPort.find(' ') != std::string::npos)
+		{
+			throw CUrlParsingError("Unexpected symbol");
+		}
+
+		try
+		{
+			int port = stoi(strPort);
+			if (!IsValidPort(port))
+			{
+				throw CUrlParsingError("Port is out of range.");
+			}
+			return port;
+		}
+		catch (std::invalid_argument)
+		{
+			throw CUrlParsingError("Invalid port");
+		}
+
+	}
+
+	std::string ParseDocument(const std::string & url)
+	{
+		if (url.empty())
+		{
+			return "/";
+		}
+
+		auto document = url;
+		if (!IsValidDocument(document))
+		{
+			throw CUrlParsingError("Invalid document");
+		}
+
+		return document;
+	}
+
+	bool IsValidPort(const int port)
+	{
+		return (port > 0 && port <= 65535);
+	}
+
+	bool IsValidDocument(const std::string & document)
+	{
+		return (document.find(' ') == std::string::npos);
+	}
+
+	bool IsValidDomain(const std::string & domain)
+	{
+		if (domain.empty())
+		{
+			throw CUrlParsingError("Empty domain");
+		}
+
+		return (domain.find(' ') == std::string::npos);
+	}
+
 }
 
-unsigned short CHttpUrl::GetPortByProtocol()
+unsigned short CHttpUrl::GetPortByProtocol() const
 {
 	switch (m_protocol)
 	{
-	case HTTP:
+	case Protocol::HTTP:
 		return 80;
-	case HTTPS:
+	case Protocol::HTTPS:
 		return 443;
 	default:
-		return 1;
-		break;
+		throw std::invalid_argument("Error when parsed protocol");
 	}
 }
 
-bool CHttpUrl::IsValidPort(int port)
+std::ostream& operator<<(std::ostream& output, const Protocol& value)
 {
-	return (port > 0 && port <= 65535);
-}
-
-bool CHttpUrl::IsValidDocument(std::string & document)
-{
-	return (document.find(' ') == std::string::npos);
-}
-
-bool CHttpUrl::IsValidDomain(std::string & domain)
-{
-	if (domain.empty())
-	{
-		throw CUrlParsingError("Empty domain");
-	}
-
-	return (domain.find(' ') == std::string::npos);
+	output << ProtocolToString(value);
+	return output;
 }
 
 CHttpUrl::CHttpUrl(std::string const& url)
-	:m_url(url)
 {
 	if (url.empty())
 	{
 		throw CUrlParsingError("Empty url");
 	} 
 
-	m_protocol = ParseProtocol(m_url);
+	m_protocol = ParseProtocol(url);
 	auto restOfUrl = url.substr(ProtocolToString(m_protocol).size() + 3, url.size() - 1);
 
 	m_domain = ParseDomain(restOfUrl);
 	restOfUrl = restOfUrl.substr(m_domain.size(), restOfUrl.size());
 
-	m_port = ParsePort(restOfUrl);
 	if (restOfUrl[0] == ':')
 	{
+		m_port = ParsePort(restOfUrl);
 		restOfUrl = restOfUrl.substr(std::to_string(m_port).size() + 1, restOfUrl.size() - 1);
+	}
+	else
+	{
+		m_port = GetPortByProtocol();
 	}
 
 	m_document = ParseDocument(restOfUrl);
@@ -104,108 +224,6 @@ CHttpUrl::CHttpUrl(
 	}
 }
 	
-
-Protocol CHttpUrl::ParseProtocol(std::string & url)
-{
-	auto protocolEnd = url.find("://");
-	if (protocolEnd == std::string::npos)
-	{
-		throw CUrlParsingError("Invalid protocol");
-	}
-
-	std::string protocol(url.begin(), url.begin() + protocolEnd);
-
-	if (protocol == "http")
-	{
-		return Protocol::HTTP;
-	}
-	else if (protocol == "https")
-	{
-		return Protocol::HTTPS;
-	}
-	else
-	{
-		throw CUrlParsingError("Invalid protocol");
-	}
-
-}
-
-std::string CHttpUrl::ParseDomain(std::string & url)
-{
-	auto domainEnd = url.find(':');
-
-	if (domainEnd == std::string::npos)
-	{
-		domainEnd = url.find("/");
-
-		if (domainEnd == std::string::npos)
-		{
-			domainEnd = url.length();
-		}
-	}
-
-	std::string domain(url.begin(), url.begin() + domainEnd);
-	
-	if (!IsValidDomain(domain))
-	{
-		throw CUrlParsingError("Invalid domain");
-	}
-	
-	return domain;
-}
-
-unsigned short CHttpUrl::ParsePort(std::string & url)
-{
-	if (url[0] != ':')
-	{
-		return GetPortByProtocol();
-	}
-	auto portEnd = url.find('/');
-
-	if (portEnd == std::string::npos)
-	{
-		portEnd = url.length();
-	}
-
-	std::string strPort(url.begin() + 1, url.begin() + portEnd);
-
-	if (strPort.find(' ') != std::string::npos)
-	{
-		throw CUrlParsingError("Unexpected symbol");
-	}
-
-	try 
-	{
-		int port = stoi(strPort);
-		if (!IsValidPort(port))
-		{
-			throw CUrlParsingError("Port is out of range.");
-		}
-		return port;
-	}
-	catch (std::invalid_argument)
-	{
-		throw CUrlParsingError("Invalid port");
-	}
-
-}
-
-std::string CHttpUrl::ParseDocument(std::string & url)
-{
-	if (url.empty())
-	{
-		return "/";
-	}
-
-	auto document = url;
-	if (!IsValidDocument(document))
-	{
-		throw CUrlParsingError("Invalid document");
-	}
-
-	return document;
-}
-
 std::string CHttpUrl::GetURL() const
 {
 	std::string url = ProtocolToString(m_protocol)

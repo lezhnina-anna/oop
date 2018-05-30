@@ -2,11 +2,11 @@
 #include <string>
 #include <iostream>
 
-enum Protocol
-{
+enum class Protocol {
 	HTTP,
 	HTTPS
 };
+std::ostream& operator<<(std::ostream& output, const Protocol& value);
 
 class CHttpUrl
 {
@@ -24,7 +24,7 @@ public:
 	CHttpUrl(
 		std::string const& domain,
 		std::string const& document,
-		Protocol protocol = HTTP);
+		Protocol protocol = Protocol::HTTP);
 
 
 	/* инициализирует URL на основе переданных параметров.
@@ -61,19 +61,8 @@ public:
 	unsigned short GetPort() const;
 
 private:
-	Protocol ParseProtocol(std::string & url);
-	std::string ParseDomain(std::string & url);
-	unsigned short ParsePort(std::string & url);
-	std::string ParseDocument(std::string & url);
+	unsigned short GetPortByProtocol() const;
 
-	std::string ProtocolToString(const Protocol & protocol) const;
-	unsigned short GetPortByProtocol();
-
-	bool IsValidPort(int port);
-	bool IsValidDocument(std::string & document);
-	bool IsValidDomain(std::string & domain);
-
-	std::string m_url;
 	std::string m_domain;
 	std::string m_document;
 	Protocol m_protocol;
